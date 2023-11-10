@@ -11,25 +11,7 @@ $(document).ready(function () {
         clientes.forEach(function (cliente, index) {
           let newRow = "<tr>";
 
-          /* newRow +=
-            "<td>" +
-            "<img class='cliente-img' src='vista.php?id=" +
-            cliente.id +
-            "' alt='Img Cliente' " +
-            "&rand=" +
-            Math.random() +
-            "width='100' />" +
-            "</td>"; */
-
-          newRow +=
-            "<td>" +
-            "<img class='cliente-img' src='vista.php?id=" +
-            cliente.id +
-            "&rand=" +
-            Math.random() +
-            "' alt='Img Cliente' width='100' />" +
-            "</td>";
-
+          newRow += "<td>" + (index + 1) + "</td>";
           newRow += "<td>" + cliente.nombre + "</td>";
           newRow += "<td>" + cliente.email + "</td>";
           newRow += "<td>" + cliente.telf + "</td>";

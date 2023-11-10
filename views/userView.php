@@ -10,7 +10,7 @@ if (!isset($_SESSION['nombre'])) {
 $con = new Conexion();
 $pdo = $con->getConexion();
 
-$title = "Clientes";
+$title = "Libros";
 $style = "../assets/css/style_gen.css";
 
 $urlInicio = "./menuView.php";
@@ -44,8 +44,8 @@ require_once './templates/temp_nav.php';
         <div class="main">
 
             <div class="informacion">
-                <h1>Listado de Clientes</h1>
-                <button type="button" name="btnRegistrar" class="btn btn-primary z-3 position-relative mb-3 my-2" data-bs-toggle="modal" data-bs-target="#registroModal" data-bs-whatever="@mdo">Agregar Cliente</button>
+                <h1>Listado de Usuarios</h1>
+                <button type="button" name="btnRegistrar" class="btn btn-primary z-3 position-relative mb-3 my-2" data-bs-toggle="modal" data-bs-target="#registroModal" data-bs-whatever="@mdo">Agregar Usuario</button>
             </div>
 
             <div class="table-container table-responsive my-4">
@@ -53,10 +53,8 @@ require_once './templates/temp_nav.php';
                     <thead>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Contraseña</th>
                         <th scope="col">Opción</th>
                     </thead>
                     <tbody>
@@ -66,39 +64,31 @@ require_once './templates/temp_nav.php';
 
         </div>
 
-        <!-- agregar clientes - modal -->
+        <!-- agregar usuarios modal -->
         <div class="modal fade" id="registroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Crear cuenta nueva</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar usuario</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
 
-                        <form class="new_customer" action="../controllers/customer/register.php" method="post" enctype="multipart/form-data">
+                        <form class="signup" action="../controllers/user/register.php" method="post" enctype="multipart/form-data">
 
-                            <div id="message" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
+                            <div id="message-register" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
 
                             <div class="mb-3">
-                                <input type="text" name="txtNewCustomer" class="form-control" placeholder="Nombre del cliente" required>
+                                <input type="text" name="txtUsu" class="form-control" placeholder="Nombre del usuario" required>
                             </div>
 
                             <div class="mb-3">
-                                <input type="email" name="txtNewEmail" class="form-control" placeholder="Email del cliente" required>
+                                <input type="email" name="txtEmail" class="form-control" placeholder="E-mail del usuario" required>
                             </div>
 
                             <div class="mb-3">
-                                <input type="number" name="txtNewNumber" class="form-control" placeholder="Núm. de teléfono" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <input type="number" name="txtNewDNI" class="form-control" placeholder="DNI" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <input type="date" name="txtNewDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+                                <input type="password" name="txtPassword" class="form-control" placeholder="Contraseña del usuario" required>
                             </div>
 
                             <div class="modal-footer">
@@ -112,44 +102,36 @@ require_once './templates/temp_nav.php';
             </div>
         </div>
 
-        <!-- actualizar clientes - modal -->
+        <!-- actualizar usuarios - modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Ciente</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar usuario</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
 
-                        <form class="edit-customer" action="../controllers/customer/updateCustomer.php" method="post" enctype="multipart/form-data">
+                        <form class="edit_user" action="../controllers/user/updateUser.php" method="post" enctype="multipart/form-data">
 
-                            <div id="message-edit" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
+                            <div id="message-register" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
 
                             <div class="mb-3">
-                                <input type="text" name="txtNewCustomerEdit" class="form-control" placeholder="Nombre del cliente" required>
+                                <input type="text" name="txtEditUsu" class="form-control" placeholder="Nombre del usuario" required>
                             </div>
 
                             <div class="mb-3">
-                                <input type="email" name="txtNewEmailEdit" class="form-control" placeholder="Email del cliente" required>
+                                <input type="email" name="txtEditEmail" class="form-control" placeholder="E-mail del usuario" required>
                             </div>
 
                             <div class="mb-3">
-                                <input type="number" name="txtNewNumberEdit" class="form-control" placeholder="Núm. de teléfono" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <input type="number" name="txtNewDNIEdit" class="form-control" placeholder="DNI" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <input type="date" name="txtNewDateEdit" class="form-control" required>
+                                <input type="password" name="txtEditPassword" class="form-control" placeholder="Contraseña del usuario" required>
                             </div>
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" name="submit" class="btn btn-primary">Actualizar</button>
+                                <button type="submit" name="submit" class="btn btn-primary">Aceptar</button>
                             </div>
 
                         </form>
@@ -158,14 +140,19 @@ require_once './templates/temp_nav.php';
             </div>
         </div>
 
+
     </div>
 
-    <!-- js - registro de nuevos clientes / actualización de tabla -->
-    <script src="../controllers/customer/register.js"></script>
-    <!-- js - edición / actualización de clientes -->
-    <script src="../controllers/customer/updateCustomer.js"></script>
+
+
+
+    <!-- js / registrar usuario -->
+    <script src="../controllers/user/register.js"></script>
+    <!-- js / actualizar usuario -->
+    <script src="../controllers/user/updateUser.js"></script>
     <!-- js - busqueda en tiempo real -->
     <script src="../assets/js/search.js"></script>
+
 </body>
 
 

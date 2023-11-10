@@ -70,51 +70,32 @@ $(document).ready(function () {
       return;
     }
 
-    /* var datosActualizados = {
+    let datosActualizados = {
       nombre: nombreCliente,
       email: emailCliente,
       telf: telfCliente,
       dni: dniCliente,
       fech: fechaRegCliente,
       id: clienteId,
-    }; */
-
-    var formData = new FormData($(".edit-customer")[0]);
-    formData.append("id", clienteId);
+    };
 
     $.ajax({
       type: "POST",
       url: "../controllers/customer/updateCustomer.php",
-      data: formData,
+      data: datosActualizados,
       dataType: "json",
-      processData: false,
-      contentType: false,
       success: function (response) {
         if (response.success) {
           $(".edit-customer")[0].reset();
-
-          $("#message-edit")
-            .removeClass("d-none")
-            .removeClass("border-danger text-danger")
-            .addClass("border-success text-success")
-            .text(response.message);
-
           $("#editModal").modal("hide");
-
           window.obtenerClientes();
-          console.log("Ejecutando actualización");
         } else {
           $("#message-edit")
             .removeClass("d-none")
             .removeClass("border-success text-success")
             .addClass("border-danger text-danger")
             .text(response.message);
-
-          console.log("No se está ejecutando la actualización");
         }
-      },
-      error: function () {
-        console.error("Error al realizar la solicitud AJAX.");
       },
     });
   });

@@ -6,17 +6,17 @@ $pdo = $con->getConexion();
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $clienteId = $_GET['id'];
 
-    $sql = 'SELECT * FROM terreno WHERE id_terreno = :id';
+    $sql = 'SELECT * FROM usuario WHERE id_usu = :id';
 
     try {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $clienteId, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            $terreno = $stmt->fetch(PDO::FETCH_ASSOC);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($terreno) {
-                echo json_encode($terreno);
+            if ($usuario) {
+                echo json_encode($usuario);
                 exit;
             }
         }
@@ -26,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     }
 }
 
-echo json_encode(['error' => 'Cliente no encontrado']);
+echo json_encode(['error' => 'Libro no encontrado']);

@@ -14,10 +14,10 @@ $title = "Carrito de Compras";
 $style = "../assets/css/style_cart.css";
 
 $urlInicio = "./menuView.php";
-$urlInmuebles = "./stateView.php";
-$urlTerrenos = "./landView.php";
-$urlPagos = "./payView.php";
+$urlLibros = "./bookView.php";
+$urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
+$urlPagos = "./payView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 

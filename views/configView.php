@@ -14,10 +14,10 @@ $title = "Cofiguración";
 $style = "../assets/css/style_conf.css";
 
 $urlInicio = "./menuView.php";
-$urlInmuebles = "./stateView.php";
-$urlTerrenos = "./landView.php";
-$urlPagos = "./payView.php";
+$urlLibros = "./bookView.php";
+$urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
+$urlPagos = "./payView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 
@@ -77,7 +77,7 @@ require_once './templates/temp_nav.php';
 
                     <div class="modal-body">
 
-                        <form class="edit-user" action="../controllers/user/updateUser.php" method="post" enctype="multipart/form-data">
+                        <form class="edit-user" action="../controllers/up_user/updateUser.php" method="post" enctype="multipart/form-data">
 
                             <?php
                             $nombre_usu = $_SESSION['nombre'];
@@ -91,7 +91,7 @@ require_once './templates/temp_nav.php';
                                 <div id="message-edit" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
 
                                 <div class="mb-3">
-                                    <input type="text" name="txtUserEdit" class="form-control" placeholder="Nuevo nombre del usuario" value="<?= $user['nombre_usu'] ?>" required>
+                                    <input type="text" name="txtUserEdit" readonly class="form-control" placeholder="Nuevo nombre del usuario" value="<?= $user['nombre_usu'] ?>" required>
                                 </div>
 
                                 <div class="mb-3">
@@ -118,7 +118,7 @@ require_once './templates/temp_nav.php';
 
     </div>
 
-    <script src="../controllers/user/updateUser.js"></script>
+    <script src="../controllers/up_user/updateUser.js"></script>
 
 </body>
 

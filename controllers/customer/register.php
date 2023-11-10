@@ -67,43 +67,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    /* validaciones - imagen */
-    $revisar = getimagesize($_FILES["image"]["tmp_name"]);
-    if ($revisar !== false) {
-        $image = $_FILES['image']['tmp_name'];
-        $imgContenido = addslashes(file_get_contents($image));
+    /* inserción */
+    $insertar = $sql->prepare("INSERT INTO cliente (nombre_cliente, email_cliente, telf_cliente, dni, fecha_registro) VALUES (?, ?, ?, ?, ?)");
 
-        /* inserción */
-        $insertar = $sql->query("INSERT INTO cliente (img_cliente, nombre_cliente, email_cliente,telf_cliente, dni, fecha_registro) VALUES ('$imgContenido', '$cliente->nombre', '$cliente->email', '$cliente->telefono', '$cliente->dni', '$cliente->fecha_reg')");
-
-        /* validaciones - inserción correcta? */
-        if ($insertar) {
-            $response = [
-                'success' => true,
-                'message' => 'Cliente creado con éxito.',
-                'cliente' => [
-                    'nombre' => $cliente->nombre,
-                    'telefono' => $cliente->telefono,
-                    'fecha_reg' => $cliente->fecha_reg,
-                ],
-            ];
-            echo json_encode($response);
-            exit;
-        } else {
-            $response = [
-                'success' => false,
-                'message' => 'Error al registrar el cliente.'
-            ];
-            echo json_encode($response);
-            exit;
-        }
+    /* validaciones - inserción correcta? */
+    if ($insertar->execute([$cliente->nombre, $cliente->email, $cliente->telefono, $cliente->dni, $cliente->fecha_reg])) {
+        $response = [
+            'success' => true,
+            'message' => 'Cliente creado con éxito.',
+            'cliente' => [
+                'nombre' => $cliente->nombre,
+                'email' => $cliente->email,
+                'telefono' => $cliente->telefono,
+                'dni' => $cliente->dni,
+                'fecha_reg' => $cliente->fecha_reg,
+            ],
+        ];
+        echo json_encode($response);
+        exit;
     } else {
-
         $response = [
             'success' => false,
-            'message' => 'Por favor seleccione una imagen a subir.',
+            'message' => 'Error al registrar el cliente.'
         ];
-
         echo json_encode($response);
         exit;
     }

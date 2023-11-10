@@ -1,26 +1,25 @@
 $(document).ready(function () {
-  window.obtenerTerrenos = function () {
+  window.obtenerUsuarios = function () {
     $.ajax({
       type: "GET",
-      url: "../controllers/land/getLands.php",
+      url: "../controllers/user/getUsers.php",
       dataType: "json",
-      success: function (terrenos) {
+      success: function (usuarios) {
         let $tbody = $("table tbody");
         $tbody.empty();
 
-        terrenos.forEach(function (terreno, index) {
+        usuarios.forEach(function (usuario, index) {
           let newRow = "<tr>";
 
           newRow += "<td>" + (index + 1) + "</td>";
-          newRow += "<td>" + terreno.ubicacion + "</td>";
-          newRow += "<td>" + terreno.descripcion + "</td>";
-          newRow += "<td>" + terreno.tamaño + "</td>";
-          newRow += "<td>" + terreno.precio + "</td>";
+          newRow += "<td>" + usuario.nombre + "</td>";
+          newRow += "<td>" + usuario.email + "</td>";
+          newRow += "<td>" + usuario.password + "</td>";
 
           newRow +=
             "<td>" +
-            '<button id="edit" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-land-id="' +
-            terreno.id +
+            '<button id="edit" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-user-id="' +
+            usuario.id +
             '">' +
             '<i class="bi bi-pencil-square"></i>' +
             "</button>" +
@@ -31,28 +30,26 @@ $(document).ready(function () {
         });
       },
       error: function () {
-        console.error("Error al obtener los datos del terreno.");
+        console.error("Error al obtener los datos de los usuario.");
       },
     });
   };
 
-  obtenerTerrenos();
+  obtenerUsuarios();
 
-  $(".new_land").submit(function (event) {
+  $(".signup").submit(function (event) {
     event.preventDefault();
 
-    let ubicacionTerreno = $("input[name='txtNewUbication']").val();
-    let descripcionTerreno = $("textarea[name='txtNewDescription']").val();
-    let tamañoTerreno = $("input[name='txtNewSize']").val();
-    let costoTerreno = $("input[name='txtNewPrice']").val();
+    let nombreUsuario = $("input[name='txtUsu']").val();
+    let correoUsuario = $("input[name='txtEmail']").val();
+    let contraseñaUsuario = $("input[name='txtPassword']").val();
 
     if (
-      ubicacionTerreno.trim() === "" ||
-      descripcionTerreno.trim() === "" ||
-      tamañoTerreno.length == 0 ||
-      costoTerreno.length == 0
+      nombreUsuario.trim() === "" ||
+      correoUsuario.trim() === "" ||
+      contraseñaUsuario.trim() === ""
     ) {
-      $("#message-register")
+      $("#message")
         .removeClass("d-none")
         .removeClass("border-success text-success")
         .addClass("border-danger text-danger")
@@ -62,19 +59,20 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../controllers/land/register.php",
+      url: "../controllers/user/register.php",
       data: $(this).serialize(),
       dataType: "json",
       success: function (response) {
         if (response.success) {
-          $(".new_land")[0].reset();
+          $(".signup")[0].reset();
+
           $("#message-register")
             .removeClass("d-none")
             .removeClass("border-danger text-danger")
             .addClass("border-success text-success")
             .text(response.message);
 
-          obtenerTerrenos();
+          obtenerUsuarios();
         } else {
           $("#message-register")
             .removeClass("d-none")

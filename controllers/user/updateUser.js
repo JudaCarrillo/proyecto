@@ -1,78 +1,77 @@
-$(document).ready(function () {
-  $(".edit-user").submit(function (event) {
-    event.preventDefault();
+  var usuarioId;
 
-    $("#message-edit").addClass("d-none");
+  $(document).on("click", ".edit-btn", function () {
+    usuarioId = $(this).data("user-id");
 
-    let nombreUsu = $("input[name='txtUserEdit']").val();
-    let emailUsu = $("input[name='txtEmailUserEdit']").val();
-    let passUsu = $("input[name='txtPassUserEdit']").val();
-
-    if (
-      nombreUsu.trim() === "" ||
-      emailUsu.trim() === "" ||
-      passUsu.trim === ""
-    ) {
-      $("#message-edit")
-        .removeClass("d-none")
-        .removeClass("border-success text-success")
-        .addClass("border-danger text-danger")
-        .text("Campos obligatorios incompletos o vacíos.");
-      return;
-    }
+    console.log(usuarioId);
 
     $.ajax({
-      type: "POST",
-      url: "../controllers/user/updateUser.php",
-      data: $(this).serialize(),
+      type: "GET",
+      url: "../controllers/user/getUserById.php",
+      data: { id: usuarioId },
       dataType: "json",
-      success: function (response) {
-        if (response.success) {
-          $(".edit-user")[0].reset();
 
-          $("#message-edit")
-            .removeClass("d-none")
-            .removeClass("border-danger text-danger")
-            .addClass("border-success text-success")
-            .text(response.message);
+      success: function (usuario) {
+        $("#message-edit").addClass("d-none");
 
-          let $table = $("<table>").addClass("w-75 z-3 position-relative");
-          let newRow = "";
+        $("input[name='txtEditUsu']").val(usuario.nombre_usu);
+        $("input[name='txtEditEmail']").val(usuario.email_usu);
+        $("input[name='txtEditPassword']").val(usuario.password_usu);
 
-          newRow += "<tr>";
-          newRow += "<td>Nombre:</td>";
-          newRow +=
-            "<td class='text-center' id='nombre'>" + nombreUsu + "</td>";
-          newRow += "</tr>";
-
-          newRow += "<tr>";
-          newRow += "<td>Correo:</td>";
-          newRow += "<td class='text-center' id='correo'>" + emailUsu + "</td>";
-          newRow += "</tr>";
-
-          newRow += "<tr>";
-          newRow += "<td>Contraseña:</td>";
-          newRow +=
-            "<td class='text-center' id='contraseña'>" + passUsu + "</td>";
-          newRow += "</tr>";
-
-          $table.append(newRow);
-
-          let $existingTable = $("table");
-          $existingTable.replaceWith($table);
-
-          $("#editModal").modal("hide");
-        } else {
-          $("#message-edit")
-            .removeClass("d-none")
-            .removeClass("border-success text-success")
-            .addClass("border-danger text-danger")
-            .text(response.message);
-        }
+        $("#editModal").modal("show");
       },
+
       error: function () {
-        console.error("Error al realizar la solicitud AJAX.");
+        console.error("Error al obtener datos del usuario: " + usuarioId);
       },
     });
   });
-});
+
+  $(document).ready(function () {
+    $(".edit_user").submit(function (event) {
+      event.preventDefault();
+
+      let nombre = $("input[name='txtEditUsu']").val();
+      let email = $("input[name='txtEditEmail']").val();
+      let password = $("input[name='txtEditPassword']").val();
+
+      if (nombre.trim() === "" || email.trim() === "" || password.trim() === "") {
+        $("#message-register")
+          .removeClass("d-none")
+          .removeClass("border-success text-success")
+          .addClass("border-danger text-danger")
+          .text("Campos obligatorios incompletos o vacíos");
+        return;
+      }
+
+      let datosActualizados = {
+        nombre: nombre,
+        email: email,
+        password: password,
+        id: usuarioId,
+      };
+
+      $.ajax({
+        type: "POST",
+        url: "../controllers/user/updateUser.php",
+        data: datosActualizados,
+        dataType: "json",
+        success: function (response) {
+          if (response.success) {
+            $(".edit_user")[0].reset();
+            $("#editModal").modal("hide");
+            window.obtenerUsuarios();
+          } else {
+            $("#message-edit")
+              .removeClass("d-none")
+              .removeClass("border-success text-success")
+              .addClass("border-danger text-danger")
+              .text(response.message);
+          }
+        },
+        error: function () {
+          console.error("Error al realizar la solicitud AJAX.");
+        },
+      });
+    });
+  });

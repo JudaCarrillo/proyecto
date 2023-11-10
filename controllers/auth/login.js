@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../controllers/auth/login.php",
+      url: "./controllers/auth/login.php",
       data: $(this).serialize(),
       dataType: "json",
       success: function (response) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
             .removeClass("border-danger text-danger")
             .addClass("border-success text-success")
             .text(response.message);
-          window.location = "menuView.php";
+          window.location = "./views/menuView.php";
         } else {
           $("#message-login")
             .removeClass("d-none")

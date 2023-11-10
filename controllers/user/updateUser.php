@@ -1,25 +1,17 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    session_start();
     require_once '../../config/conexion.php';
 
     try {
-
         $con = new Conexion();
         $sql = $con->getConexion();
 
-        $nameUser = trim($_POST['txtUserEdit']);
-        $emailUser = trim($_POST['txtEmailUserEdit']);
-        $passwordUser = trim($_POST['txtPassUserEdit']);
+        $nombre = trim($_POST['nombre']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $id = trim($_POST['id']);
 
-        $nombre_usu = $_SESSION['nombre'];
-        $cuentaQuery = $sql->prepare("SELECT id_usu FROM usuario WHERE nombre_usu = :nombre_usu");
-        $cuentaQuery->bindParam(':nombre_usu', $nombre_usu);
-        $cuentaQuery->execute();
-
-        $id_usuario = $cuentaQuery->fetchColumn();
-
-        if (empty($nameUser) || empty($emailUser) || empty($passwordUser)) {
+        if (empty($nombre) || empty($email) || empty($password)) {
             $response = [
                 'success' => false,
                 'message' => 'Campos obligatorios incompletos o vacíos.'
@@ -29,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $hashPasswordUsu = password_hash($passwordUser, PASSWORD_BCRYPT);
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        $query = "UPDATE usuario SET nombre_usu = '$nameUser', email_usu = '$emailUser', password_usu = '$passwordUser', hash_password_usu = '$hashPasswordUsu' WHERE id_usu = '$id_usuario'";
+        $query = "UPDATE usuario SET nombre_usu = '$nombre', email_usu = '$email', password_usu = '$password', hash_password_usu = '$password_hash' WHERE id_usu = '$id'";
         $stmt = $sql->query($query);
 
         if ($stmt->execute()) {
@@ -42,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $response = [
                 'success' => false,
-                'message' => 'Error al actualizar el terreno.'
+                'message' => 'Error al actualizar.'
             ];
         }
 

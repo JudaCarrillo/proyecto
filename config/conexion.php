@@ -4,7 +4,7 @@ class Conexion
     public function getConexion()
     {
         $host = 'localhost';
-        $dbname = 'sistema';
+        $dbname = 'proyecto';
         $user = 'root';
         $pass = '';
 

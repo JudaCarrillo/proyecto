@@ -6,17 +6,17 @@ $pdo = $con->getConexion();
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $clienteId = $_GET['id'];
 
-    $sql = 'SELECT * FROM inmueble WHERE id_inmueble = :id';
+    $sql = 'SELECT * FROM libros WHERE id_libro = :id';
 
     try {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $clienteId, PDO::PARAM_INT);
 
         if ($stmt->execute()) {
-            $inmueble = $stmt->fetch(PDO::FETCH_ASSOC);
+            $terreno = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($inmueble) {
-                echo json_encode($inmueble);
+            if ($terreno) {
+                echo json_encode($terreno);
                 exit;
             }
         }
@@ -26,4 +26,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     }
 }
 
-echo json_encode(['error' => 'Cliente no encontrado']);
+echo json_encode(['error' => 'Libro no encontrado']);

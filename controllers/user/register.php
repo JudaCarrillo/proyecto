@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $con = new Conexion();
     $sql = $con->getConexion();
 
-    $nuevoUsuario = trim($_POST['txtNewUsu']);
-    $nuevoCorreo = trim($_POST['txtNewEmail']);
-    $nuevaContraseña = trim($_POST['txtNewPassword']);
+    $nuevoUsuario = trim($_POST['txtUsu']);
+    $nuevoCorreo = trim($_POST['txtEmail']);
+    $nuevaContraseña = trim($_POST['txtPassword']);
 
     if (empty($nuevoUsuario) || empty($nuevoUsuario) || empty($nuevaContraseña)) {
         $response = [
@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo json_encode($response);
         exit;
+        
     } else {
         $usuario = new User($nuevoUsuario, $nuevoCorreo, $nuevaContraseña);
 

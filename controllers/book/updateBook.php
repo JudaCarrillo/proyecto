@@ -6,13 +6,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $con = new Conexion();
         $sql = $con->getConexion();
 
-        $ubicacionTerreno = trim($_POST['ubicacion']);
-        $descripcionTerreno = trim($_POST['descripcion']);
-        $tamañoTerreno = trim($_POST['tamaño']);
-        $costoTerreno = trim($_POST['precio']);
-        $idTerreno = trim($_POST['id']);
+        $titulo = trim($_POST['titulo']);
+        $autor = trim($_POST['autor']);
+        $descripcion = trim($_POST['descripcion']);
+        $stock = trim($_POST['stock']);
+        $costo = trim($_POST['costo']);
+        $id = trim($_POST['id']);
 
-        if (empty($ubicacionTerreno) || strlen($tamañoTerreno) == 0 || empty($descripcionTerreno) || strlen($costoTerreno) == 0) {
+        if (empty($titulo) || empty($autor) || empty($descripcion) || strlen($stock) == 0 || strlen($costo) == 0) {
             $response = [
                 'success' => false,
                 'message' => 'Campos obligatorios incompletos o vacíos.'
@@ -22,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $query = "UPDATE terreno SET ubicacion_tem = '$ubicacionTerreno', descripcion_tem = '$descripcionTerreno', tamaño_tem = '$tamañoTerreno', costo_tem = '$costoTerreno' WHERE id_terreno = '$idTerreno'";
+        $query = "UPDATE libros SET titulo = '$titulo', autor = '$autor', descripcion = '$descripcion', stock = '$stock', costo = '$costo' WHERE id_libro = '$id'";
         $stmt = $sql->query($query);
 
         if ($stmt->execute()) {
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $response = [
                 'success' => false,
-                'message' => 'Error al actualizar el terreno.'
+                'message' => 'Error al actualizar.'
             ];
         }
 

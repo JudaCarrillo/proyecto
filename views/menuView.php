@@ -14,10 +14,10 @@ $title = "Menú";
 $style = "../assets/css/style_menu.css";
 
 $urlInicio = "./menuView.php";
-$urlInmuebles = "./stateView.php";
-$urlTerrenos = "./landView.php";
-$urlPagos = "./payView.php";
+$urlLibros = "./bookView.php";
+$urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
+$urlPagos = "./payView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 
@@ -37,19 +37,19 @@ require_once './templates/temp_nav.php';
 
         <div class="dashboard">
             <div class="box inmuebles">
-                <i class="fas fa-home"></i>
+                <i class="fa fa-book"></i>
                 <div class="box-content">
-                    <div class="box-text">Inmuebles</div>
+                    <div class="box-text">Libros</div>
                     <div class="box-number">
                         <?php
                         try {
-                            $sentencia = "SELECT COUNT(*) as total_inmuebles FROM inmueble;";
+                            $sentencia = "SELECT COUNT(*) as total_libros FROM libros;";
                             $query = $pdo->query($sentencia);
 
                             $resultado = $query->fetch(PDO::FETCH_ASSOC);
 
                             if ($resultado) {
-                                $totalInmuebles = $resultado['total_inmuebles'];
+                                $totalInmuebles = $resultado['total_libros'];
                                 echo $totalInmuebles;
                             } else {
                                 echo 0;
@@ -62,15 +62,13 @@ require_once './templates/temp_nav.php';
                 </div>
             </div>
 
-
-
-            <div class="box terrenos">
+            <!-- <div class="box terrenos">
                 <i class="fas fa-leaf"></i>
                 <div class="box-content">
                     <div class="box-text">Terrenos</div>
                     <div class="box-number">
                         <?php
-                        try {
+                        /* try {
                             $sentencia = "SELECT COUNT(*) as total_terrenos FROM terreno;";
                             $query = $pdo->query($sentencia);
 
@@ -84,11 +82,11 @@ require_once './templates/temp_nav.php';
                             }
                         } catch (PDOException $e) {
                             echo "Error: " . $e->getMessage();
-                        }
+                        } */
                         ?>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="box usuarios">
                 <i class="fas fa-users"></i>

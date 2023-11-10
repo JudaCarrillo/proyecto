@@ -35,23 +35,9 @@
             </li>
 
             <li>
-                <a href="<?php echo $urlInmuebles; ?>">
-                    <i class="bi bi-bookmark-fill nav-icon"></i>
-                    <span class="nav-text">Inmuebles</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $urlTerrenos; ?>">
-                    <i class="bi bi-building-fill nav-icon"></i>
-                    <span class="nav-text">Terrenos</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo $urlPagos; ?>">
-                    <i class="bi bi-cart-fill nav-icon"></i>
-                    <span class="nav-text">Pagos</span>
+                <a href="<?php echo $urlLibros; ?>">
+                    <i class="fa fa-book nav-icon"></i>
+                    <span class="nav-text">Libros</span>
                 </a>
             </li>
 
@@ -59,6 +45,26 @@
                 <a href="<?php echo $urlClientes; ?>">
                     <i class="bi bi-person-fill nav-icon"></i>
                     <span class="nav-text">Clientes</span>
+                </a>
+            </li>
+
+            <?php
+            $nombre_usu = $_SESSION['nombre'];
+            if ($nombre_usu === 'Administrador') {
+                echo '<li>
+                    <a href="' . $urlUsuarios . '">
+                    <i class="bi bi-person-bounding-box nav-icon"></i>
+                    <span class="nav-text">Usuarios</span>
+                    </a>
+                    </li>';
+            }
+            ?>
+
+
+            <li>
+                <a href="<?php echo $urlPagos; ?>">
+                    <i class="bi bi-cart-fill nav-icon"></i>
+                    <span class="nav-text">Pagos</span>
                 </a>
             </li>
         </ul>

@@ -1,26 +1,27 @@
 $(document).ready(function () {
-  window.obtenerInmuebles = function () {
+  window.obtenerLibros = function () {
     $.ajax({
       type: "GET",
-      url: "../controllers/state/getStates.php",
+      url: "../controllers/book/getBooks.php",
       dataType: "json",
-      success: function (inmuebles) {
+      success: function (libros) {
         let $tbody = $("table tbody");
         $tbody.empty();
 
-        inmuebles.forEach(function (inmueble, index) {
+        libros.forEach(function (libro, index) {
           let newRow = "<tr>";
 
           newRow += "<td>" + (index + 1) + "</td>";
-          newRow += "<td>" + inmueble.ubicacion + "</td>";
-          newRow += "<td>" + inmueble.descripcion + "</td>";
-          newRow += "<td>" + inmueble.tamaño + "</td>";
-          newRow += "<td>" + inmueble.precio + "</td>";
+          newRow += "<td>" + libro.titulo + "</td>";
+          newRow += "<td>" + libro.autor + "</td>";
+          newRow += "<td>" + libro.descripcion + "</td>";
+          newRow += "<td>" + libro.stock + "</td>";
+          newRow += "<td>" + libro.costo + "</td>";
 
           newRow +=
             "<td>" +
-            '<button id="edit" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-state-id="' +
-            inmueble.id +
+            '<button id="edit" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
+            libro.id +
             '">' +
             '<i class="bi bi-pencil-square"></i>' +
             "</button>" +
@@ -31,26 +32,28 @@ $(document).ready(function () {
         });
       },
       error: function () {
-        console.error("Error al obtener los datos del terreno.");
+        console.error("Error al obtener los datos de los libros.");
       },
     });
   };
 
-  obtenerInmuebles();
+  obtenerLibros();
 
-  $(".new_state").submit(function (event) {
+  $(".new_book").submit(function (event) {
     event.preventDefault();
 
-    let ubicacionTerreno = $("input[name='txtNewUbication']").val();
-    let descripcionTerreno = $("textarea[name='txtNewDescription']").val();
-    let tamañoTerreno = $("input[name='txtNewSize']").val();
-    let costoTerreno = $("input[name='txtNewPrice']").val();
+    let titulo = $("input[name='txtTitulo']").val();
+    let autor = $("input[name='txtAutor']").val();
+    let descripcion = $("textarea[name='txtDescription']").val();
+    let stock = $("input[name='txtStock']").val();
+    let costo = $("input[name='txtCosto']").val();
 
     if (
-      ubicacionTerreno.trim() === "" ||
-      descripcionTerreno.trim() === "" ||
-      tamañoTerreno.length == 0 ||
-      costoTerreno.length == 0
+      titulo.trim() === "" ||
+      autor.trim() === "" ||
+      descripcion.trim() === "" ||
+      costo.length == 0 ||
+      stock.length == 0
     ) {
       $("#message-register")
         .removeClass("d-none")
@@ -62,19 +65,19 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "../controllers/state/register.php",
+      url: "../controllers/book/register.php",
       data: $(this).serialize(),
       dataType: "json",
       success: function (response) {
         if (response.success) {
-          $(".new_state")[0].reset();
+          $(".new_book")[0].reset();
           $("#message-register")
             .removeClass("d-none")
             .removeClass("border-danger text-danger")
             .addClass("border-success text-success")
             .text(response.message);
 
-          obtenerInmuebles();
+          obtenerLibros();
         } else {
           $("#message-register")
             .removeClass("d-none")
