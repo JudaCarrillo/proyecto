@@ -27,6 +27,15 @@ $(document).ready(function () {
             "</button>" +
             "</td>";
 
+          newRow +=
+            "<td>" +
+            '<button id="delete" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
+            libro.id +
+            '">' +
+            '<i class="bi bi-trash-fill"></i>' +
+            "</button>" +
+            "</td>";
+
           newRow += "</tr>";
           $tbody.append(newRow);
         });

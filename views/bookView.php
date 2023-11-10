@@ -57,7 +57,7 @@ require_once './templates/temp_nav.php';
                         <th scope="col">Descripción</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Costo</th>
-                        <th scope="col">Opción</th>
+                        <th scope="col" colspan="2">Opción</th>
                     </thead>
                     <tbody>
                     </tbody>
