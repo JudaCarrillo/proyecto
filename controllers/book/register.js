@@ -29,7 +29,7 @@ $(document).ready(function () {
 
           newRow +=
             "<td>" +
-            '<button id="delete" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
+            '<button id="trash" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
             libro.id +
             '">' +
             '<i class="bi bi-trash-fill"></i>' +
