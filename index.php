@@ -21,7 +21,7 @@
     <div class="home-content">
       <div class="home-logo">
         <img class="lg-emp" src="./assets/img/logo.webp" alt="Logo Las Casuarinas">
-        <h1>Las Casuarinas</h1>
+        <h1>Biblioteca</h1>
         <p>Proyectos Actuales y nuestras ilusiones del futuro</p>
       </div>
 
