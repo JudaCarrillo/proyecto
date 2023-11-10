@@ -1,8 +1,10 @@
 var optionLabel;
+var cantidad_venta;
 
 $(document).ready(function () {
   var selectProducto = document.getElementById("select-produt");
 
+  // asigna los valores automaticamente
   selectProducto.addEventListener("change", function () {
     var selectedOption = selectProducto.options[selectProducto.selectedIndex];
     optionLabel = selectedOption.textContent;
@@ -18,11 +20,16 @@ $(document).ready(function () {
       success: function (response) {
         var responseData = JSON.parse(response);
         var costoProducto = responseData.costo;
+        cantidad_venta = parseInt($("#stock").val());
+        costoTotal = costoProducto * cantidad_venta;
+        $("#monto").val(costoTotal);
 
-        // dependiendo de la cantidad el monto aumentará
-        costoProducto *= cantidad;
-
-        $("#monto").val(costoProducto);
+        // actualización en tiempo real del campo monto
+        $("#stock").on("input", function () {
+          cantidad_venta = parseInt($(this).val());
+          costoTotal = costoProducto * cantidad_venta;
+          $("#monto").val(costoTotal);
+        });
 
         console.log("Respuesta del servidor: " + response);
       },
@@ -32,19 +39,20 @@ $(document).ready(function () {
     });
   });
 
+  // envia los valores al php para confirmar la compra
   $(".pay-form").submit(function (event) {
     event.preventDefault();
 
     var monto = $("#monto").val();
-
+    // var cantidad = $("#stock").val();
     var formData = $(this).serializeArray();
-    formData.push({ name: "monto", value: monto });
-
-    formData.push({ name: "producto", value: optionLabel });
-    console.log(optionLabel);
-
     var selectedProductId = selectProducto.value;
-    formData.push({ name: "id_libro", value: selectedProductId });
+    formData.push({ name: "monto", value: monto });
+    formData.push({ name: "producto", value: optionLabel });
+    formData.push({ name: "cantidad", value: cantidad_venta });
+    formData.push({ name: "id_producto", value: selectedProductId });
+
+    console.log("cantidad venta: " + cantidad_venta);
 
     $.ajax({
       type: "POST",

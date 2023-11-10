@@ -10,15 +10,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo = ($_POST['producto']);
 
     // obtienes la cantidad a comprar
-    $cantidad = ($POST['cantidad']);
+    $cantidad = ($_POST['cantidad']);
 
     // obtener stock del producto 
     $sentencia_cant_bd = "SELECT stock FROM libros WHERE id_libro = :id";
 
-    $stmt = $sql->prepare($sentencia);
+    $stmt = $sql->prepare($sentencia_cant_bd);
     $stmt->bindParam(':id', $id_product, PDO::PARAM_INT);
     if ($stmt->execute()) {
-        $cant_bd = $stmt->fetch(PDO::FETCH_ASSOC);
+        $cant_bd = $stmt->fetch(PDO::FETCH_ASSOC)['stock'];
     }
 
     // validar cantidades a vender
