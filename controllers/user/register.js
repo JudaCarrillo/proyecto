@@ -18,10 +18,19 @@ $(document).ready(function () {
 
           newRow +=
             "<td>" +
-            '<button id="edit" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-user-id="' +
+            '<button id="edit" class="edit-btn z-3 position-relative" type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-user-id="' +
             usuario.id +
             '">' +
             '<i class="bi bi-pencil-square"></i>' +
+            "</button>" +
+            "</td>";
+
+          newRow +=
+            "<td>" +
+            '<button class="delete-btn z-3 position-relative" data-user-id="' +
+            usuario.id +
+            '">' +
+            '<i class="bi bi-trash"></i>' +
             "</button>" +
             "</td>";
 
@@ -30,7 +39,7 @@ $(document).ready(function () {
         });
       },
       error: function () {
-        console.error("Error al obtener los datos de los usuario.");
+        console.error("Error al obtener los datos de los usuarios.");
       },
     });
   };
@@ -82,5 +91,28 @@ $(document).ready(function () {
         }
       },
     });
+  });
+
+  $("table tbody").on("click", ".delete-btn", function () {
+    let userId = $(this).data("user-id");
+
+    if (confirm("¿Seguro que deseas eliminar este usuario?")) {
+      $.ajax({
+        type: "POST",
+        url: "../controllers/user/deleteUser.php",
+        data: { id: userId },
+        dataType: "json",
+        success: function (response) {
+          if (response.success) {
+            obtenerUsuarios();
+          } else {
+            console.error("Error al intentar eliminar el usuario: " + response.message);
+          }
+        },
+        error: function () {
+          console.error("Error en la solicitud AJAX para eliminar el usuario.");
+        },
+      });
+    }
   });
 });
