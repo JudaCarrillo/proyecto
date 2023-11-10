@@ -51,7 +51,7 @@ require_once './templates/temp_nav.php';
                                 $optionLabel = $customer['nombre_cliente'];
                             ?>
 
-                                <option value="<?= $product['id_terreno'] ?>"><?= $optionLabel ?></option>
+                                <option value="<?= $customer['id_cliente'] ?>"><?= $optionLabel ?></option>
 
                             <?php endforeach; ?>
                         </select>
