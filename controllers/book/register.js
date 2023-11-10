@@ -29,7 +29,7 @@ $(document).ready(function () {
 
           newRow +=
             "<td>" +
-            '<button id="delete" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
+            '<button id="trash" class="delete-btn z-3 position-relative" data-book-id="' +
             libro.id +
             '">' +
             '<i class="bi bi-trash"></i>' +
@@ -61,7 +61,9 @@ $(document).ready(function () {
           if (response.success) {
             obtenerLibros();
           } else {
-            console.error("Error al intentar eliminar el libro: " + response.message);
+            console.error(
+              "Error al intentar eliminar el libro: " + response.message
+            );
           }
         },
         error: function () {

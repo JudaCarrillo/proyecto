@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $id = trim($_POST['id']);
 
-        $query = "DELETE FROM usuario WHERE id_usu = :id"; // Change 'usuario' to your actual user table name
+        $query = "DELETE FROM cliente WHERE id_cliente = :id";
         $stmt = $sql->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -34,4 +34,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-?>

@@ -27,7 +27,7 @@ $(document).ready(function () {
 
           newRow +=
             "<td>" +
-            '<button class="delete-btn z-3 position-relative" data-user-id="' +
+            '<button id="trash" class="delete-btn z-3 position-relative" data-user-id="' +
             usuario.id +
             '">' +
             '<i class="bi bi-trash"></i>' +
@@ -106,7 +106,9 @@ $(document).ready(function () {
           if (response.success) {
             obtenerUsuarios();
           } else {
-            console.error("Error al intentar eliminar el usuario: " + response.message);
+            console.error(
+              "Error al intentar eliminar el usuario: " + response.message
+            );
           }
         },
         error: function () {
