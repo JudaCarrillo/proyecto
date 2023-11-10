@@ -1,0 +1,25 @@
+.container-fluid {
+  margin-top: -100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container-form {
+  margin: 2rem 12rem;
+}
+
+.container-form h1 {
+  font-style: italic;
+  text-align: center;
+}
+
+.container-form div {
+  margin-top: 1rem;
+}
+
+/* media */
+@media screen and (max-width: 425px) {
+  .container-form .btn {
+    margin-left: 2.5rem;
+  }
+}

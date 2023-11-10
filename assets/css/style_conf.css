@@ -1,0 +1,57 @@
+.container-fluid {
+  align-items: center;
+  margin-top: -100vh;
+}
+
+/* BIENVENIDA */
+.bienvenida,
+.table-container {
+  margin-top: 1rem;
+  text-align: center;
+  margin: 2rem 12rem;
+}
+
+.bienvenida h1 {
+  font-style: italic;
+}
+
+.bienvenida p,
+.table-container td {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 50rem;
+  width: 45rem;
+}
+
+.table-container button.btn {
+  margin-top: 2rem;
+  margin-left: 7rem;
+}
+
+@media screen and (max-width: 768px) {
+  .bienvenida,
+  .table-container {
+    margin: 2rem 0.5rem;
+  }
+
+  .table-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .table-container table td,
+  .bienvenida p {
+    font-size: 1rem;
+  }
+
+  .table-container button.btn {
+    margin-top: 2rem;
+    margin-left: 0rem;
+  }
+}

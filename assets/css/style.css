@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../img/bg_2560.webp) no-repeat left top fixed;
+  background-size: cover;
+}
+
+/* section home */
+.home-buttons {
+  width: 45%;
+  position: fixed;
+  height: auto;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.home-buttons .btn {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+
+  color: white;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.home-buttons .btn:hover {
+  background-color: white;
+  border: 2px solid transparent;
+  color: black;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
+  filter: brightness(1.2);
+}
+
+/* logo */
+.home-logo {
+  width: 35rem;
+  margin-left: 5rem;
+  height: auto;
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-logo h1 {
+  color: white;
+  margin-top: -6rem;
+  font-size: 2.5rem;
+}
+
+.home-logo p {
+  color: white;
+  margin-top: -1.5rem;
+  font-size: 1.2rem;
+}
+
+.lg-emp {
+  position: initial;
+  max-width: 20rem;
+  width: 15rem;
+  height: 100%;
+  margin: 1rem 5rem;
+}
+
+/* media - responsive */
+@media screen and (max-width: 425px) {
+  body {
+    background: url(../img/bg_alt2.png) no-repeat left top fixed;
+    background-size: cover;
+  }
+
+  /* home - logo */
+  .home-logo {
+    width: 10rem;
+    margin-left: 8rem;
+    height: auto;
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home-logo h1 {
+    color: white;
+    margin-top: -6rem;
+    font-size: 1.5rem;  
+  }
+
+  .home-logo p {
+    color: white;
+    margin-top: -1rem;
+    font-size: 0.8rem;
+  }
+
+  /* home - buttons */
+  .home-buttons {
+    width: 0;
+    height: auto;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    margin-right: 15rem;
+    margin-top: 20rem;
+  }
+
+  .home-buttons .btn {
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .home-buttons .btn {
+    width: 5rem;
+  }
+
+  .home-buttons .btn:hover {
+    background-color: white;
+    border: 2px solid transparent;
+    color: black;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
+    filter: brightness(1.2);
+  }
+}
+

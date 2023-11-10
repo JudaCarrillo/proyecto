@@ -1,0 +1,93 @@
+.container-fluid {
+  margin-top: -100vh;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-fluid a {
+  text-decoration: none;
+}
+
+.informacion {
+  margin-top: 1rem;
+}
+
+.informacion h1 {
+  font-style: italic;
+}
+
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 200px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.inmuebles {
+  background: #e0eafc;
+  background: -webkit-linear-gradient(to right, #cfdef3, #e0eafc);
+  background: linear-gradient(to right, #cfdef3, #e0eafc);
+}
+
+.terrenos {
+  background: #ece9e6;
+  background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
+  background: linear-gradient(to right, #ffffff, #ece9e6);
+}
+
+.usuarios {
+  background: #e0eafc;
+  background: -webkit-linear-gradient(to right, #cfdef3, #e0eafc);
+  background: linear-gradient(to right, #cfdef3, #e0eafc);
+}
+
+.box i {
+  font-size: 36px;
+  color: #333;
+}
+
+.box-content {
+  text-align: center;
+  color: #333;
+}
+
+.box-text {
+  font-weight: bold;
+  color: #555;
+}
+
+.box-number {
+  font-size: 24px;
+  color: #333;
+}
+
+@media screen and (max-width: 425px) {
+  .container-fluid .dashboard {
+    margin-left: 5.5rem;
+  }
+
+  .box {
+    width: 10rem;
+    height: 9rem;
+  }
+
+  .box i {
+    font-size: 32px;
+    margin-top: 1rem;
+  }
+}
