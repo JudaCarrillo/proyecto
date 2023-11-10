@@ -55,7 +55,7 @@ require_once './templates/temp_nav.php';
                         <th scope="col">Nombre</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Contraseña</th>
-                        <th scope="col">Opción</th>
+                        <th scope="col" colspan="2">Opción</th>
                     </thead>
                     <tbody>
                     </tbody>
