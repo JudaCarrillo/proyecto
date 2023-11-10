@@ -6,13 +6,8 @@ $pdo = $con->getConexion();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $clienteId = $_GET['id'];
-    $product = $_GET['label'];
 
-    if (stripos($product, 'Inmueble') !== false) {
-        $sql = 'SELECT id_inmueble AS id, ubicacion_inm AS ubicacion, descripcion_inm AS descripcion, tamaño_inm AS tamaño, costo_inm AS costo FROM inmueble WHERE id_inmueble = :id';
-    } else {
-        $sql = 'SELECT id_terreno AS id, ubicacion_tem AS ubicacion, descripcion_tem AS descripcion, tamaño_tem AS tamaño, costo_tem AS costo FROM terreno WHERE id_terreno = :id';
-    }
+    $sql = 'SELECT id_libro AS id, titulo, autor, descripcion, stock, costo FROM libros WHERE id_libro = :id';
 
     try {
         $stmt = $pdo->prepare($sql);

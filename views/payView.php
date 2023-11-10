@@ -25,7 +25,6 @@ require_once './templates/temp_nav.php';
 ?>
 
 <!DOCTYPE html>
-<script src="https://www.paypal.com/sdk/js?client-id=Ab3oNN-D3HSub2czSUWgGSNMmKxsssU0NzTb41Ojd2Vn40qrvOlB44n6PeVcivBPpGlkKLD275KeV5gU"></script>
 
 <body>
     <div class="container-fluid">
@@ -62,70 +61,46 @@ require_once './templates/temp_nav.php';
                     <div class="form-group mb-3">
                         <label for="select-product" class="mb-1">Productos:</label>
 
-                        <select class="form-select" id="select-produt" aria-label="Seleccione un terreno">
+                        <select class="form-select" id="select-produt" aria-label="Seleccione un libro">
                             <option selected>Seleccione un producto</option>
 
                             <?php
-                            $terrenosQuery = $pdo->prepare("SELECT * FROM terreno");
+                            $terrenosQuery = $pdo->prepare("SELECT * FROM libros");
                             $terrenosQuery->execute();
                             $results = $terrenosQuery->fetchAll(PDO::FETCH_ASSOC);
 
                             foreach ($results as $product) :
-                                $optionLabel = "Terreno " . $product['tamaño_tem'] . "m";
+                                $optionLabel = "Libro " . $product['titulo'];
                             ?>
 
-                                <option value="<?= $product['id_terreno'] ?>"><?= $optionLabel ?></option>
-
-                            <?php endforeach; ?>
-
-                            <?php
-                            $inmueblesQuery = $pdo->prepare("SELECT * FROM inmueble");
-                            $inmueblesQuery->execute();
-                            $results = $inmueblesQuery->fetchAll(PDO::FETCH_ASSOC);
-
-                            foreach ($results as $product) :
-                                $optionLabel = "Inmueble " . $product['tamaño_inm'] . "m";
-                            ?>
-
-                                <option value="<?= $product['id_inmueble'] ?>"><?= $optionLabel ?></option>
+                                <option value="<?= $product['id_libro'] ?>"><?= $optionLabel ?></option>
 
                             <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="monto">Cantidad:</label>
+                        <input type="number" class="form-control" id="stock" value="1" min="1" placeholder="Cantidad a comprar" required>
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="monto">Monto a Pagar:</label>
                         <input type="number" class="form-control" id="monto" placeholder="Monto a Pagar" required>
                     </div>
+
+                    <div class="mb-3">
+                        <input type="date" name="txtNewDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Realizar Pago</button>
                 </form>
             </div>
-
-
-            <div id="paypal-button-container"></div>
         </div>
 
 
 
     </div>
-    <script>
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '10.00'
-                        }
-                    }]
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('Pago completado con éxito. ID de transacción: ' + details.id);
-                });
-            }
-        }).render('#paypal-button-container');
-    </script>
 
     <!-- js / lógica -->
     <script src="../controllers/pay/logic.js"></script>

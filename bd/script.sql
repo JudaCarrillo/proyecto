@@ -27,3 +27,6 @@ CREATE TABLE libros (
     stock INT NOT NULL ,
     costo INT NOT NULL , 
     PRIMARY KEY (id_libro)) ENGINE = InnoDB;
+
+-- usuario administrador
+INSERT INTO usuario (`nombre_usu`, `email_usu`, `password_usu`, `hash_password_usu`) VALUES ('Administrador', 'administrador@gmail.com', '123', '$2y$10$aj5ytC9wycDUtQO6rgEzcejtt37HKkXm0B2Wcjt99ZgU0NXFx7IlK')

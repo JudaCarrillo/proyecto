@@ -6,11 +6,7 @@ $(document).ready(function () {
   selectProducto.addEventListener("change", function () {
     var selectedOption = selectProducto.options[selectProducto.selectedIndex];
     optionLabel = selectedOption.textContent;
-
-    console.log("Etiqueta de opción seleccionada: " + optionLabel);
-
     var selectedProductId = selectProducto.value;
-    console.log("Valor seleccionado de producto: " + selectedProductId);
 
     $.ajax({
       type: "GET",
@@ -22,6 +18,9 @@ $(document).ready(function () {
       success: function (response) {
         var responseData = JSON.parse(response);
         var costoProducto = responseData.costo;
+
+        // dependiendo de la cantidad el monto aumentará
+        costoProducto *= cantidad;
 
         $("#monto").val(costoProducto);
 
@@ -37,6 +36,7 @@ $(document).ready(function () {
     event.preventDefault();
 
     var monto = $("#monto").val();
+
     var formData = $(this).serializeArray();
     formData.push({ name: "monto", value: monto });
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
     console.log(optionLabel);
 
     var selectedProductId = selectProducto.value;
-    formData.push({ name: "id_producto", value: selectedProductId });
+    formData.push({ name: "id_libro", value: selectedProductId });
 
     $.ajax({
       type: "POST",

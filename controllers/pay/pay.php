@@ -9,11 +9,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_product = ($_POST['id_producto']);
     $tipo = ($_POST['producto']);
 
-    if (stripos($tipo, 'Inmueble') !== false) {
-        $sentencia = "DELETE FROM inmueble where id_inmueble = :id";
-    } else {
-        $sentencia = "DELETE FROM terreno where id_terreno = :id";
+    // obtienes la cantidad a comprar
+    $cantidad = ($POST['cantidad']);
+
+    // obtener stock del producto 
+    $sentencia_cant_bd = "SELECT stock FROM libros WHERE id_libro = :id";
+
+    $stmt = $sql->prepare($sentencia);
+    $stmt->bindParam(':id', $id_product, PDO::PARAM_INT);
+    if ($stmt->execute()) {
+        $cant_bd = $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    // validar cantidades a vender
+    $cant_rest =  $cant_bd - $cantidad;
+
+    // preparar sentencia
+    $sentencia = "UPDATE libros SET stock = '$cant_rest'  where id_libro = :id";
 
     try {
         $stmt = $sql->prepare($sentencia);
@@ -22,14 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             $response = [
                 'success' => true,
-                'message' => 'Compra realizada exitosamente!...',
+                'message' => 'Venta realizada exitosamente!...',
             ];
             echo json_encode($response);
             exit;
         }
         $response = [
             'success' => false,
-            'message' => 'Error al realizar la compra.'
+            'message' => 'Error al realizar la venta.'
         ];
         echo json_encode($response);
         exit;
