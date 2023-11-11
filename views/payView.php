@@ -12,7 +12,7 @@ $pdo = $con->getConexion();
 
 $title = "Carrito de Compras";
 $style = "../assets/css/style_cart.css";
-
+$style2 = "../assets/css/style_animaciones.css";
 $urlInicio = "./menuView.php";
 $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";

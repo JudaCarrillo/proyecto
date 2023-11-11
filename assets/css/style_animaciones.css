@@ -1,0 +1,410 @@
+  
+  .heading {
+    font-size: .9rem;
+    text-align: center;
+    color: rgb(189, 188, 141);
+  }
+  
+  .heading span {
+    font-size: 2.2rem;
+    font-weight: bold;
+    display: block;
+    font-style: italic;
+    margin-top: .25rem;
+    background-image: linear-gradient(90deg, rgba(196, 157, 182, 0.21), rgb(134, 71, 141), rgb(170, 84, 161), rgba(163, 130, 192, 0.094));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 15px 10px 55px plum;
+    text-transform: uppercase;
+    letter-spacing: 1rem;
+    z-index: 99;
+    animation: heading-stretch .7s forwards ease-out;
+  }
+  
+  .heading span::before,
+  .heading span::after {
+    content: '—';
+  }
+  
+  .content {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  
+  .item {
+    --item-duration: 8s;
+    --idx: 0;
+    display: flex;
+    grid-area: 1 / 1;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.1rem;
+    text-transform: lowercase;
+    font-style: italic;
+    opacity: 0;
+    animation: item-fade var(--item-duration) infinite ease-in-out;
+    animation-delay: calc(var(--idx) * var(--item-duration) / 3);
+  }
+  
+  .item svg {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .item--create {
+    --idx: 0;
+  }
+  
+  .item--post {
+    --idx: 1;
+  }
+  
+  .item--inspire {
+    --idx: 2;
+  }
+  
+  button {
+    --flight-duration: 3s;
+    position: relative;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1ch;
+    border: none;
+    border-bottom: 2px solid rgb(189, 188, 141);
+    border-top: 2px solid rgb(189, 188, 141);
+    border-radius: .9rem;
+    background-color: transparent;
+    color: rgb(189, 188, 141);
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 200ms ease-out;
+    backdrop-filter: blur(20px);
+  }
+  
+  button::before,
+  button::after {
+    offset-path: path('m 0 10 c 8 -25 0 -45 400 -400');
+    position: absolute;
+    left: -30px;
+    opacity: 0;
+  }
+  
+  button::before {
+    content: '🚀';
+    transform: rotate(60deg);
+    z-index: 1;
+  }
+  
+  button::after {
+    content: '💨';
+    z-index: 0;
+    transform: scale(0) rotate(180deg);
+  }
+  
+  
+  
+  button:hover::before {
+    animation: rocket-flight var(--flight-duration) infinite ease-in-out;
+  }
+  
+  button:hover::after {
+    z-index: 0;
+    transform: rotate(180deg);
+    animation: rocket-start var(--flight-duration) infinite ease-in-out;
+  }
+  
+  
+  /*
+      ANIMATION: HEADING
+  */
+  
+  @-webkit-keyframes heading-stretch {
+    from {
+      opacity: .8;
+      transform: scale(.8);
+      letter-spacing: normal;
+      filter: blur(50px);
+      text-shadow: none;
+    }
+  
+    to {
+      opacity: unset;
+      transform: unset;
+      letter-spacing: 1rem;
+      filter: unset;
+    }
+  }
+  
+  @-moz-keyframes heading-stretch {
+    from {
+      opacity: .8;
+      transform: scale(.8);
+      letter-spacing: normal;
+      filter: blur(50px);
+      text-shadow: none;
+    }
+  
+    to {
+      opacity: unset;
+      transform: unset;
+      letter-spacing: 1rem;
+      filter: unset;
+    }
+  }
+  
+  @keyframes heading-stretch {
+    from {
+      opacity: .8;
+      transform: scale(.8);
+      letter-spacing: normal;
+      filter: blur(50px);
+      text-shadow: none;
+    }
+  
+    to {
+      opacity: unset;
+      transform: unset;
+      letter-spacing: 1rem;
+      filter: unset;
+    }
+  }
+  
+  /*
+      ANIMATION: SPACE
+  */
+  
+  @-webkit-keyframes space-drift {
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    33% {
+      background-position: 80% 0%;
+    }
+  
+    67% {
+      background-position: 80% 100%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @-moz-keyframes space-drift {
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    33% {
+      background-position: 80% 0%;
+    }
+  
+    67% {
+      background-position: 80% 100%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes space-drift {
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    33% {
+      background-position: 80% 0%;
+    }
+  
+    67% {
+      background-position: 80% 100%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /*
+      ANIMATION: ROCKET FLIGHT
+  */
+  
+  @-webkit-keyframes rocket-flight {
+    0% {
+      opacity: 0;
+      offset-distance: 0%;
+    }
+  
+    10% {
+      opacity: 1;
+    }
+  
+    100% {
+      offset-distance: 100%;
+      opacity: .3;
+      transform: scale(.3);
+    }
+  }
+  
+  @-moz-keyframes rocket-flight {
+    0% {
+      opacity: 0;
+      offset-distance: 0%;
+    }
+  
+    10% {
+      opacity: 1;
+    }
+  
+    100% {
+      offset-distance: 100%;
+      opacity: .3;
+      transform: scale(.3);
+    }
+  }
+  
+  @keyframes rocket-flight {
+    0% {
+      opacity: 0;
+      offset-distance: 0%;
+    }
+  
+    10% {
+      opacity: 1;
+    }
+  
+    100% {
+      offset-distance: 100%;
+      opacity: .3;
+      transform: scale(.3);
+    }
+  }
+  
+  /*
+      ANIMATION: ITEM FADE
+  */
+  
+  @-webkit-keyframes item-fade {
+    0%, 20% {
+      opacity: 0;
+      transform: translateX(10px);
+      filter: blur(5px);
+    }
+  
+    40%, 60% {
+      opacity: 1;
+      transform: unset;
+      filter: unset;
+    }
+  
+    70%, 100% {
+      opacity: 0;
+      transform: translateX(-10px);
+      filter: blur(5px);
+    }
+  }
+  
+  @-moz-keyframes item-fade {
+    0%, 20% {
+      opacity: 0;
+      transform: translateX(10px);
+      filter: blur(5px);
+    }
+  
+    40%, 60% {
+      opacity: 1;
+      transform: unset;
+      filter: unset;
+    }
+  
+    70%, 100% {
+      opacity: 0;
+      transform: translateX(-10px);
+      filter: blur(5px);
+    }
+  }
+  
+  @keyframes item-fade {
+    0%, 20% {
+      opacity: 0;
+      transform: translateX(10px);
+      filter: blur(5px);
+    }
+  
+    40%, 60% {
+      opacity: 1;
+      transform: unset;
+      filter: unset;
+    }
+  
+    70%, 100% {
+      opacity: 0;
+      transform: translateX(-10px);
+      filter: blur(5px);
+    }
+  }
+  
+  /*
+      ANIMATION: ROCKET START (SMOKE)
+  */
+  
+  @-webkit-keyframes rocket-start {
+    0% {
+      transform: scale(0) rotate(180deg) translateX(0);
+    }
+  
+    20% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg) translateX(12px);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(180deg) translateX(20px);
+    }
+  }
+  
+  @-moz-keyframes rocket-start {
+    0% {
+      transform: scale(0) rotate(180deg) translateX(0);
+    }
+  
+    20% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg) translateX(12px);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(180deg) translateX(20px);
+    }
+  }
+  
+  @keyframes rocket-start {
+    0% {
+      transform: scale(0) rotate(180deg) translateX(0);
+    }
+  
+    20% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg) translateX(12px);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: scale(0) rotate(180deg) translateX(20px);
+    }
+  }

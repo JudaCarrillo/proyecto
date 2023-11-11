@@ -12,7 +12,7 @@ $pdo = $con->getConexion();
 
 $title = "Cofiguración";
 $style = "../assets/css/style_conf.css";
-
+$style2 = "../assets/css/style_conf.css";
 $urlInicio = "./menuView.php";
 $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
@@ -63,7 +63,7 @@ require_once './templates/temp_nav.php';
                 <?php endforeach; ?>
             </table>
 
-            <button type="button" name="btnRegistrar" class="btn btn-small w-25  btn-outline-primary z-3 position-relative" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@mdo">Editar</button>
+            <button type="button" name="btnRegistrar" class="btn btn-small w-25 btn-dark  z-3 position-relative" data-bs-toggle="modal" data-bs-target="#editModal" data-bs-whatever="@mdo">Editar</button>
         </div>
 
         <!-- actualizar usuario - modal -->

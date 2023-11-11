@@ -20,9 +20,9 @@
   <section id="home" class="home">
     <div class="home-content">
       <div class="home-logo">
-        <img class="lg-emp" src="./assets/img/logo.webp" alt="Logo Las Casuarinas">
+     
         <h1>Biblioteca</h1>
-        <p>Proyectos Actuales y nuestras ilusiones del futuro</p>
+        <p>La lectura es la mejor arma</p>
       </div>
 
       <div class="home-buttons">

@@ -11,6 +11,10 @@
 .container-form h1 {
   font-style: italic;
   text-align: center;
+  color:rgba(255, 255, 255, 0.878)
+}
+.container-form label {
+  color: rgba(255, 255, 255, 0.878)
 }
 
 .container-form div {

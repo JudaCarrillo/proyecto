@@ -12,7 +12,7 @@ $pdo = $con->getConexion();
 
 $title = "Menú";
 $style = "../assets/css/style_menu.css";
-
+$style2 = "../assets/css/style_animaciones.css";
 $urlInicio = "./menuView.php";
 $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
