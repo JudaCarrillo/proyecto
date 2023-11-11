@@ -10,7 +10,7 @@ if (!isset($_SESSION['nombre'])) {
 $con = new Conexion();
 $pdo = $con->getConexion();
 
-$title = "Libros";
+$title = "Usuarios";
 $style = "../assets/css/style_gen.css";
 $style2 = "../assets/css/style_animaciones.css";
 $urlInicio = "./menuView.php";
@@ -18,6 +18,7 @@ $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
 $urlPagos = "./payView.php";
+$urlCompras = "./buyView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 
@@ -55,7 +56,7 @@ require_once './templates/temp_nav.php';
                         <th scope="col">Nombre</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Contraseña</th>
-                        <th scope="col">Opción</th>
+                        <th scope="col" colspan="2">Opción</th>
                     </thead>
                     <tbody>
                     </tbody>

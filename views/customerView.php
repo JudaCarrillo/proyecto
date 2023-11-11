@@ -19,6 +19,7 @@ $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
 $urlPagos = "./payView.php";
+$urlCompras = "./buyView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 
@@ -58,7 +59,7 @@ require_once './templates/temp_nav.php';
                         <th scope="col">Teléfono</th>
                         <th scope="col">DNI</th>
                         <th scope="col">Fecha</th>
-                        <th scope="col">Opción</th>
+                        <th scope="col" colspan="2">Opción</th>
                     </thead>
                     <tbody>
                     </tbody>

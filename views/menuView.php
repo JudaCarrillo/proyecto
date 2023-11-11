@@ -18,6 +18,7 @@ $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
 $urlClientes = "./customerView.php";
 $urlPagos = "./payView.php";
+$urlCompras = "./buyView.php";
 $urlConfig = "./configView.php";
 $urlLogout = "../controllers/auth/logout.php";
 

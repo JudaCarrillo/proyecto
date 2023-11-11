@@ -27,6 +27,15 @@ $(document).ready(function () {
             "</button>" +
             "</td>";
 
+          newRow +=
+            "<td>" +
+            '<button id="trash" class="delete-btn z-3 position-relative" data-customer-id="' +
+            cliente.id +
+            '">' +
+            '<i class="bi bi-trash"></i>' +
+            "</button>" +
+            "</td>";
+            
           newRow += "</tr>";
           $tbody.append(newRow);
         });
@@ -38,7 +47,30 @@ $(document).ready(function () {
   };
 
   obtenerClientes();
+  $("table tbody").on("click", ".delete-btn", function () {
+    let customerId = $(this).data("customer-id");
 
+    if (confirm("¿Seguro que deseas eliminar este cliente?")) {
+      $.ajax({
+        type: "POST",
+        url: "../controllers/customer/deleteCustomer.php",
+        data: { id: customerId },
+        dataType: "json",
+        success: function (response) {
+          if (response.success) {
+            obtenerClientes();
+          } else {
+            console.error(
+              "Error al intentar eliminar el cliente: " + response.message
+            );
+          }
+        },
+        error: function () {
+          console.error("Error en la solicitud AJAX para eliminar el cliente.");
+        },
+      });
+    }
+  });
   $(".new_customer").submit(function (event) {
     event.preventDefault();
 

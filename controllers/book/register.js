@@ -29,10 +29,10 @@ $(document).ready(function () {
 
           newRow +=
             "<td>" +
-            '<button id="delete" class="edit-btn z-3 position-relative"  type="button" data-bs-toggle="modal" data-bs-target="#editModal" data-book-id="' +
+            '<button id="trash" class="delete-btn z-3 position-relative" data-book-id="' +
             libro.id +
             '">' +
-            '<i class="bi bi-trash-fill"></i>' +
+            '<i class="bi bi-trash"></i>' +
             "</button>" +
             "</td>";
 
@@ -47,6 +47,31 @@ $(document).ready(function () {
   };
 
   obtenerLibros();
+  //eveto
+  $("table tbody").on("click", ".delete-btn", function () {
+    let bookId = $(this).data("book-id");
+
+    if (confirm("¿Seguro que deseas eliminar este libro?")) {
+      $.ajax({
+        type: "POST",
+        url: "../controllers/book/deleteBook.php",
+        data: { id: bookId },
+        dataType: "json",
+        success: function (response) {
+          if (response.success) {
+            obtenerLibros();
+          } else {
+            console.error(
+              "Error al intentar eliminar el libro: " + response.message
+            );
+          }
+        },
+        error: function () {
+          console.error("Error en la solicitud AJAX para eliminar el libro.");
+        },
+      });
+    }
+  });
 
   $(".new_book").submit(function (event) {
     event.preventDefault();
