@@ -12,7 +12,7 @@ $pdo = $con->getConexion();
 
 $title = "Usuarios";
 $style = "../assets/css/style_gen.css";
-
+$style2 = "../assets/css/style_animaciones.css";
 $urlInicio = "./menuView.php";
 $urlLibros = "./bookView.php";
 $urlUsuarios = "./userView.php";
@@ -46,11 +46,11 @@ require_once './templates/temp_nav.php';
 
             <div class="informacion">
                 <h1>Listado de Usuarios</h1>
-                <button type="button" name="btnRegistrar" class="btn btn-primary z-3 position-relative mb-3 my-2" data-bs-toggle="modal" data-bs-target="#registroModal" data-bs-whatever="@mdo">Agregar Usuario</button>
+                <button type="button" name="btnRegistrar" class="button-80 z-3 position-relative mb-3 my-2" data-bs-toggle="modal" data-bs-target="#registroModal" data-bs-whatever="@mdo">Agregar Usuario</button>
             </div>
 
             <div class="table-container table-responsive my-4">
-                <table class="table table-striped text-center">
+                <table class="table table-dark text-center">
                     <thead>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>

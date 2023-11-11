@@ -13,12 +13,14 @@
 
 .bienvenida h1 {
   font-style: italic;
+  color: rgba(255, 255, 255, 0.878)
 }
 
 .bienvenida p,
 .table-container td {
   font-size: 1.5rem;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.878)
 }
 
 .table-container {
