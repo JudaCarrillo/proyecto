@@ -63,8 +63,15 @@
 
             <li>
                 <a href="<?php echo $urlPagos; ?>">
+                    <i class="bi bi-bag-fill nav-icon"></i>
+                    <span class="nav-text">Ventas</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="<?php echo $urlCompras; ?>">
                     <i class="bi bi-cart-fill nav-icon"></i>
-                    <span class="nav-text">Pagos</span>
+                    <span class="nav-text">Compras</span>
                 </a>
             </li>
         </ul>

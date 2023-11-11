@@ -10,7 +10,7 @@ if (!isset($_SESSION['nombre'])) {
 $con = new Conexion();
 $pdo = $con->getConexion();
 
-$title = "Carrito de Ventas";
+$title = "Carrito de Compras";
 $style = "../assets/css/style_cart.css";
 
 $urlInicio = "./menuView.php";
@@ -30,29 +30,31 @@ require_once './templates/temp_nav.php';
 <body>
     <div class="container-fluid">
         <div class="container-form">
-            <h1 class="text-center">Formulario de Ventas</h1>
+            <h1 class="text-center">Formulario de Compras</h1>
 
             <div id="message-pay" class="p pb-2 mb-4 my-4 text-danger border-bottom border-danger d-none"></div>
 
 
             <div class="main z-3 position-relative">
-                <form method="post" action="../controllers/pay/pay.php" class="pay-form">
+                <form method="post" action="../controllers/buy/buy.php" class="pay-form">
                     <div class="form-group mb-3">
-                        <label for="nombre" class="mb-1">Nombre del cliente:</label>
+                        <label for="nombre" class="mb-1">Nombre del trabajador:</label>
 
                         <select class="form-select" aria-label="Seleccione un terreno">
-                            <option selected>Seleccione un cliente</option>
+                            <option selected>Seleccione un usuario</option>
 
                             <?php
-                            $clientesQuery = $pdo->prepare("SELECT * FROM cliente");
-                            $clientesQuery->execute();
-                            $results = $clientesQuery->fetchAll(PDO::FETCH_ASSOC);
+                            $nombre_usu = $_SESSION['nombre'];
 
-                            foreach ($results as $customer) :
-                                $optionLabel = $customer['nombre_cliente'];
+                            $usuariosQuery = $pdo->prepare("SELECT * FROM usuario");
+                            $usuariosQuery->execute();
+                            $results = $usuariosQuery->fetchAll(PDO::FETCH_ASSOC);
+
+                            foreach ($results as $user) :
+                                $optionLabel = $user['nombre_usu'];
                             ?>
 
-                                <option value="<?= $customer['id_cliente'] ?>"><?= $optionLabel ?></option>
+                                <option value="<?= $user['id_usu'] ?>"><?= $optionLabel ?></option>
 
                             <?php endforeach; ?>
                         </select>
@@ -94,7 +96,7 @@ require_once './templates/temp_nav.php';
                         <input type="date" name="txtNewDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Confirmar Venta</button>
+                    <button type="submit" class="btn btn-primary">Confirmar Compra</button>
                 </form>
             </div>
         </div>
@@ -104,7 +106,7 @@ require_once './templates/temp_nav.php';
     </div>
 
     <!-- js / lógica -->
-    <script src="../controllers/pay/logic.js"></script>
+    <script src="../controllers/buy/logic.js"></script>
 
 
 </body>
